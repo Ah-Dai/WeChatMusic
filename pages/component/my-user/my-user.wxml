@@ -1,0 +1,12 @@
+<cu-custom bgColor="bg-gradual-green">
+  <view slot="content">我的</view>
+</cu-custom>
+
+<view class="bg-white">
+  <view class="flex solid-bottom padding align-center">
+    <view class="bg-green padding-xs margin-xs round">
+      <view class="cu-avatar xl round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
+    </view>
+    <view class="padding-sm margin-xs radius">请登录</view>
+  </view>
+</view>

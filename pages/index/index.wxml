@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<home wx:if="{{pageCur === 'home'}}"/>
+<my-user wx:if="{{pageCur === 'my-user'}}"/>
+
+<view class="cu-tabbar-height cu-tabbar-height"></view>
+
+<view  class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="navChange" data-cur="home">
+    <view class="cuIcon-cu-image">
+      <image src="/images/tabbar/basics{{pageCur === 'home' ? '_cur':''}}.png"></image>
+    </view>
+    <view class="{{pageCur === 'home' ? 'text-green':'text-gray'}}">首页</view>
+  </view>
+  <view class="action" bindtap="navChange" data-cur="my-user">
+    <view class="cuIcon-cu-image">
+      <image src="/images/tabbar/about{{pageCur === 'my-user' ? '_cur':''}}.png"></image>
+    </view>
+    <view class="{{pageCur === 'my-user' ? 'text-green':'text-gray'}}">我的</view>
+  </view>
+</view>

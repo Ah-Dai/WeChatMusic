@@ -1,0 +1,19 @@
+<cu-custom bgColor="bg-gradual-green">
+  <view slot="content">首页</view>
+</cu-custom>
+
+<view class="cu-bar bg-white search">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="搜索icon" confirm-type="search" bindinput="searchIcon"></input>
+  </view>
+</view>
+
+<view class="cu-list grid col-3 no-border margin-top-sm">
+  <view class="cu-item" wx:for="{{3}}" wx:key="{{index}}" bindtap="outflowId">
+    <view class="cuIcon-wefill text-yellow"></view>
+    <text>{{index}}</text>
+  </view>
+</view>
+
+<song-list />
