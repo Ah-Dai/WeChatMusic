@@ -10,10 +10,34 @@
 </view>
 
 <view class="cu-list grid col-3 no-border margin-top-sm">
-  <view class="cu-item" wx:for="{{3}}" wx:key="{{index}}" bindtap="outflowId">
-    <view class="cuIcon-wefill text-yellow"></view>
-    <text>{{index}}</text>
+  <view class="cu-item" wx:for="{{pageDown}}" wx:key="{{item.id}}" data-id="{{item.id}}" bindtap="outflowId">
+    <view class="{{item.icon}} text-yellow"></view>
+    <text>{{item.name}}</text>
   </view>
 </view>
 
-<song-list />
+<view class="cu-bar bg-white solid-bottom margin-top-sm">
+  <view class="action">
+    <text class="cuIcon-title text-green"></text>推荐歌曲
+  </view>
+</view>
+
+<view class="cu-list menu-avatar">
+  <block wx:for="{{songList}}" wx:key="{{item.id}}">
+    <view class="cu-item" data-id="{{item.id}}" bindtap="onTap">
+      <view class="cu-avatar radius lg" style="background-image:url({{item.songSrc}});"></view>
+      <view class="content">
+        <view class="text-green">
+          <text class="text-cut">{{item.songName}}</text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">{{item.name}}</text>
+        </view>
+      </view>
+      <!-- <view class="action">
+        <view class="text-grey text-xs">22:20</view>
+        <view class="cu-tag round bg-red sm">5</view>
+      </view> -->
+    </view>
+  </block>
+</view>

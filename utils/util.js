@@ -14,6 +14,29 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+
+
+class Usertest{
+  constructor(user){
+    this.user = user
+  }
+
+  phoneTest(phone){
+    if(this.user.phone !== phone){
+      return false
+    }
+    return true
+  }
+
+  pswTest(psw) {
+    if (this.user.psw !== psw) {
+      return false
+    }
+    return true
+  }
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  User: Usertest
 }

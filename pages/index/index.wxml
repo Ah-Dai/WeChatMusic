@@ -1,4 +1,9 @@
 <!--index.wxml-->
+<!-- <import src="/utils/loading.wxml" /> -->
+<!-- <template is="loading" data="{{render: true}}" /> -->
+<!-- <template is="err" wx:if="{{false}}"/> -->
+<!-- <model modelName="Model"/> -->
+
 <home wx:if="{{pageCur === 'home'}}"/>
 <my-user wx:if="{{pageCur === 'my-user'}}"/>
 

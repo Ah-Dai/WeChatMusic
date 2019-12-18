@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/login/login",
+    "pages/song-menu/song-menu",
     "pages/singer-page/singer-page"
   ],
   "window": {

@@ -1,0 +1,31 @@
+<template name="loading">
+  <view class='cu-load load-modal'>
+    <view class='cuIcon-emojifill text-orange'></view>
+    <!-- <image src='/images/logo.png' class='png' mode='aspectFit'></image> -->
+    <view class='gray-text'>加载中...</view>
+  </view>
+</template>
+
+<template name="loadError">
+  <view class="cu-load bg-red erro"></view>
+</template>
+
+<!-- <template name="conciseModel">
+  <view class="cu-modal show">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">Modal标题</view>
+        <view class="action" bindtap="{{hideModal}}">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding-xl">
+        Modal 内容。
+      </view>
+      <view class="cu-bar bg-white">
+        <view class="action margin-0 flex-sub  solid-left" bindtap="{{hideModal}}">我知道了</view>
+      </view>
+    </view>
+  </view>
+</template> -->
+

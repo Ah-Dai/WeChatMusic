@@ -6,6 +6,10 @@ Page({
     hidden: true
   },
   onLoad() {
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    });
     let list = [];
     for (let i = 0; i < 26; i++) {
       list[i] = String.fromCharCode(65 + i)
@@ -16,6 +20,7 @@ Page({
     })
   },
   onReady() {
+    wx.hideLoading();
     let that = this;
     wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function (res) {
       that.setData({

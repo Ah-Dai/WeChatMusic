@@ -1,0 +1,9 @@
+/* pages/component/song-list/song-list.wxss */
+.page {
+  height: 100Vh;
+  width: 100vw;
+}
+
+.page.show {
+  overflow: hidden;
+}

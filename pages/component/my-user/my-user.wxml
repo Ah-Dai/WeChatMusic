@@ -7,6 +7,9 @@
     <view class="bg-green padding-xs margin-xs round">
       <view class="cu-avatar xl round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
     </view>
-    <view class="padding-sm margin-xs radius">请登录</view>
+    <view class="padding-sm margin-xs radius" wx:if="{{userinfo !== null}}">{{userinfo.name}}</view>
+    <view class="padding-sm margin-xs radius" bindtap="login" wx:else>请登录</view>
+
+    <!-- <view class="padding-sm margin-xs radius">请登录</view> -->
   </view>
 </view>
