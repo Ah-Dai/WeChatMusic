@@ -16,7 +16,7 @@ App({
   },
   
   globalData: {
-    pathUrl: '',
+    pathUrl: 'http://localhost:3000',
     userInfo: null
   }
 })

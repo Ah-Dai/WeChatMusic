@@ -1,93 +1,103 @@
 const app = getApp();
+import { request } from '../../utils/request.js'
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    hidden: true
+
+    multiArray: [
+      [{
+          name: '华语',
+          value: '100',
+          checked: 'true'
+        }, {
+          name: '欧美',
+          value: '200',
+        }, {
+          name: '日本',
+          value: '600',
+        }, {
+          name: '韩国',
+          value: '700',
+        }, {
+          name: '其他',
+          value: '400',
+      }],
+      [{
+          name: '男',
+          value: '1',
+          checked: 'true'
+        },{
+          name: '女',
+          value: '2'
+        }, {
+          name: '乐队/组合',
+          value: '3'
+      }]
+    ],
+
+    category: '100',
+    code: '1',
+    categoryCode: '华语男歌手'
   },
-  onLoad() {
+
+  onLoad(){
+    let { category, code } = this.data;
+    this.gainArtist(category, code);
     wx.showLoading({
       title: '加载中...',
       mask: true
     });
-    let list = [];
-    for (let i = 0; i < 26; i++) {
-      list[i] = String.fromCharCode(65 + i)
-    }
-    this.setData({
-      list: list,
-      listCur: list[0]
-    })
   },
+
   onReady() {
-    wx.hideLoading();
-    let that = this;
-    wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function (res) {
-      that.setData({
-        boxTop: res.top
-      })
-    }).exec();
-    wx.createSelectorQuery().select('.indexes').boundingClientRect(function (res) {
-      that.setData({
-        barTop: res.top
-      })
-    }).exec()
+    wx.hideLoading()
   },
-  //获取文字信息
-  getCur(e) {
-    this.setData({
-      hidden: false,
-      listCur: this.data.list[e.target.id],
+
+  gainArtist(category,code){
+    const _this = this;
+    const cat = category + code;
+    request({
+      url: `/artist/list?cat=${cat}&limit=${10}`,
+    }).then((res) => {
+      console.log(res)
+      _this.setData({
+        artists: res.artists
+      })
     })
   },
 
-  setCur(e) {
+  gainCategoryCode(e){
+    let { detail } = e;
+    let name = detail.value.length == 3 ? 'category' : 'code';
+
     this.setData({
-      hidden: true,
-      listCur: this.data.listCur
+      [name]: detail.value
+    });
+
+    let { category, code, multiArray } = this.data;
+    this.gainArtist(category, code);
+
+    let artistname = multiArray[0].filter(item => { return category === item.value });
+    let artistsex = multiArray[1].filter(item => { return code === item.value });
+    let sort = artistsex[0].name !== '3' ? `${artistsex[0].name}歌手` : artistsex[0].name;
+
+    this.setData({
+      categoryCode: artistname[0].name + sort
     })
-  },
-  //滑动选择Item
-  tMove(e) {
-    let y = e.touches[0].clientY,
-      offsettop = this.data.boxTop,
-      that = this;
-    //判断选择区域,只有在选择区才会生效
-    if (y > offsettop) {
-      let num = parseInt((y - offsettop) / 20);
-      this.setData({
-        listCur: that.data.list[num]
-      })
-    };
+    
   },
 
-  //触发全部开始选择
-  tStart() {
+  // 侧边栏显示
+  showModal(e) {
     this.setData({
-      hidden: false
+      modalName: e.currentTarget.dataset.target
     })
   },
-
-  //触发结束选择
-  tEnd() {
+  // 侧边栏隐藏
+  hideModal(e) {
     this.setData({
-      hidden: true,
-      listCurID: this.data.listCur
+      modalName: null
     })
   },
-  indexSelect(e) {
-    let that = this;
-    let barHeight = this.data.barHeight;
-    let list = this.data.list;
-    let scrollY = Math.ceil(list.length * e.detail.y / barHeight);
-    for (let i = 0; i < list.length; i++) {
-      if (scrollY < i + 1) {
-        that.setData({
-          listCur: list[i],
-          movableY: i * 20
-        })
-        return false
-      }
-    }
-  }
 });

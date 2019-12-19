@@ -1,12 +1,12 @@
 function request(options){
-  const getApp = getApp();
+  const app = getApp();
   return new Promise((resolve,reject) => {
     wx.request({
-      url: getApp.globalData + options.url,
+      url: app.globalData.pathUrl + options.url,
       data: options.data,
       method: options.method,
       success(res){
-        resolve(res)
+        resolve(res.data)
       },
       fail(err){
         reject(err)

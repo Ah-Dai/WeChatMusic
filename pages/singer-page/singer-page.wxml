@@ -4,41 +4,50 @@
   <view slot="backText">返回</view>
 </cu-custom>
 
-
-
-<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
-  <view class="search-form round">
-    <text class="cuIcon-search"></text>
-    <input type="text" placeholder="输入搜索的关键词" confirm-type="search"></input>
+<view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px;">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text> {{categoryCode}}
   </view>
   <view class="action">
-    <button class="new-btn cu-btn bg-gradual-green shadow-blur round">搜索</button>
+    <button class="cu-btn bg-green shadow margin-left" bindtap="showModal" data-target="DrawerModalL">Left</button>
   </view>
 </view>
 
-<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style="height:calc(100vh - {{CustomBar}}px - 50px)" scroll-with-animation="true" enable-back-to-top="true">
-  <block wx:for="{{list}}" wx:key>
-    <view class="padding indexItem-{{list[index]}}" id="indexes-{{list[index]}}" data-index="{{list[index]}}">{{list[index]}}</view>
-    <view class="cu-list menu-avatar no-padding">
-      <view class="cu-item" wx:for="{{2}}" wx:key wx:for-index="sub">
-        <view class="cu-avatar round lg">{{list[index]}}</view>
-        <view class="content">
-          <view class="text-grey">{{list[index]}}
-            <text class="text-abc">{{list[sub]}}</text>君</view>
-          <view class="text-gray text-sm">
-            有{{sub+2}}个主子需要伺候
-          </view>
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+
+    <view class="cu-list menu text-left">
+      <radio-group class="block" bindchange="gainCategoryCode">
+        <view class="cu-form-group" wx:for="{{multiArray[0]}}" wx:key="{{item.value}}">
+          <view class="title">{{item.name}}</view>
+          <radio class="radio" value="{{item.value}}" checked="{{item.checked}}"></radio>
         </view>
-      </view>
+      </radio-group>
     </view>
-  </block>
-</scroll-view>
-<view class="indexBar" style="height:calc(100vh - {{CustomBar}}px - 50px)">
-  <view class="indexBar-box" bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
-    <view class="indexBar-item" wx:for="{{list}}" wx:key id="{{index}}" bindtouchstart="getCur" bindtouchend="setCur">{{list[index]}}</view>
+
+    <view class="cu-list menu text-left">
+      <radio-group class="block" bindchange="gainCategoryCode">
+        <view class="cu-form-group" wx:for="{{multiArray[1]}}" wx:key="{{item.value}}">
+          <view class="title">{{item.name}}</view>
+          <radio class="radio" value="{{item.value}}" checked="{{item.checked}}"></radio>
+        </view>
+      </radio-group>
+    </view>
+
   </view>
 </view>
-<!--选择显示-->
-<view hidden="{{hidden}}" class="indexToast">
-  {{listCur}}
-</view>
+
+<scroll-view>
+  <view class="cu-list menu-avatar">
+
+    <block wx:for="{{artists}}" wx:key="{{item.id}}">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url({{item.img1v1Url}});"></view>
+        <view class="content">
+          <view class="text-grey">{{item.name}}</view>
+        </view>
+      </view>
+    </block>
+
+  </view>
+</scroll-view>

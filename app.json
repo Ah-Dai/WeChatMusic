@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/singer-page/singer-page",
     "pages/index/index",
     "pages/login/login",
-    "pages/song-menu/song-menu",
-    "pages/singer-page/singer-page"
+    "pages/song-menu/song-menu"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
