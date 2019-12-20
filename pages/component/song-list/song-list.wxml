@@ -1,47 +1,30 @@
-<cu-custom bgColor="bg-gradual-green">
-  <view slot="content">我的</view>
-</cu-custom>
-
-<scroll-view>
-  <view class="bg-img bg-mask padding-tb-xl" style="background-image: url('https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg');height: 414rpx;">
-    <view class="padding-xl text-white">
-      <view class="padding-xs text-xl">
-        钢铁之翼
-      </view>
-      <view class="padding-xs">
-        Only the guilty need fear me.
-      </view>
-    </view>
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text> 播放全部
   </view>
+  <!-- <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="menuModal">设置</button>
+  </view> -->
+</view>
 
-  <view class="cu-bar bg-white solid-bottom">
-    <view class="action">
-      <text class="cuIcon-title text-orange "></text> 播放全部
-    </view>
-    <!-- <view class="action">
-      <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="menuModal">设置</button>
-    </view> -->
-  </view>
+<view class="cu-list menu-avatar">
+  <block wx:for="{{songlist}}" wx:key="{{item.id}}">
+    <view class="cu-item" data-id="{{item.id}}" bindtap="onTap">
+    
+      <view class="new-cu-avatar">{{index + 1}}</view>
 
-  <view class="cu-list menu-avatar">
-    <block wx:for="{{songlist}}" wx:key="{{item.id}}">
-      <view class="cu-item" data-id="{{item.id}}" bindtap="onTap">
-      
-        <view class="cu-avatar radius lg" style="background-image:url({{item.songSrc}});">{{index + 1}}</view>
-
-        <view class="content">
-          <view class="text-green">
-            <text class="text-cut">{{item.songName}}</text>
-          </view>
-          <view class="text-gray text-sm flex">
-            <text class="text-cut">{{item.name}}</text>
-          </view>
+      <view class="new-content">
+        <view class="text-green">
+          <text class="text-cut">{{item.songName}}</text>
         </view>
-        <!-- <view class="action">
-          <view class="text-grey text-xs">22:20</view>
-          <view class="cu-tag round bg-red sm">5</view>
-        </view> -->
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">{{item.name}}</text>
+        </view>
       </view>
-    </block>
-  </view>
-</scroll-view>
+      <!-- <view class="action">
+        <view class="text-grey text-xs">22:20</view>
+        <view class="cu-tag round bg-red sm">5</view>
+      </view> -->
+    </view>
+  </block>
+</view>

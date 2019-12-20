@@ -1,9 +1,27 @@
 /* pages/component/song-list/song-list.wxss */
-.page {
+/* .page {
   height: 100Vh;
   width: 100vw;
 }
 
 .page.show {
   overflow: hidden;
+} */
+.new-cu-avatar{
+  background-color: #fff;
+  color: #ccc;
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  left: 20rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-content{
+  left: 100rpx;
+  position: absolute;
+  width: calc(100% - 96rpx - 60rpx - 120rpx - 20rpx);
+  line-height: 1.6em;
 }
