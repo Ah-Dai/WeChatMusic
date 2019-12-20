@@ -1,70 +1,75 @@
-const app = getApp()
+const app = getApp();
+import { request } from '../../utils/request.js';
 Page({
   data: {
-    StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    Custom: app.globalData.Custom,
+    categories: [{
+        id: "0",
+        value: "语种"
+      }, {
+        id: "1",
+        value: "风格"
+      }, {
+        id: "2",
+        value: "场景"
+      }, {
+        id: "3",
+        value: "情感"
+      }, {
+        id: "4",
+        value: "主题"
+    }],
+    modalName: false,
     TabCur: 0,
-    MainCur: 0,
-    VerticalNavTop: 0,
-    list: [],
-    load: true
+    scrollLeft: 0
   },
-  onLoad() {
-    wx.showLoading({
-      title: '加载中...',
-      mask: true
-    });
-    let list = [{}];
-    for (let i = 0; i < 26; i++) {
-      list[i] = {};
-      list[i].name = String.fromCharCode(65 + i);
-      list[i].id = i;
-    }
-    this.setData({
-      list: list,
-      listCur: list[0]
-    })
-  },
-  onReady() {
-    wx.hideLoading()
-  },
+  
   tabSelect(e) {
     this.setData({
       TabCur: e.currentTarget.dataset.id,
-      MainCur: e.currentTarget.dataset.id,
-      VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
+      scrollLeft: (e.currentTarget.dataset.id - 1) * 60
     })
   },
-  VerticalMain(e) {
-    let that = this;
-    let list = this.data.list;
-    let tabHeight = 0;
-    if (this.data.load) {
-      for (let i = 0; i < list.length; i++) {
-        let view = wx.createSelectorQuery().select("#main-" + list[i].id);
-        view.fields({
-          size: true
-        }, data => {
-          list[i].top = tabHeight;
-          tabHeight = tabHeight + data.height;
-          list[i].bottom = tabHeight;
-        }).exec();
-      }
-      that.setData({
-        load: false,
-        list: list
-      })
-    }
-    let scrollTop = e.detail.scrollTop + 20;
-    for (let i = 0; i < list.length; i++) {
-      if (scrollTop > list[i].top && scrollTop < list[i].bottom) {
-        that.setData({
-          VerticalNavTop: (list[i].id - 1) * 50,
-          TabCur: list[i].id
-        })
-        return false
-      }
-    }
-  }
+
+  onLoad(){
+    // let sub = wx.getStorageSync('catlistSub');
+    // const _this = this;
+    // if(sub){
+    //   // console.log(sub);
+    //   this.setData({
+    //     catlistSub: sub
+    //   })
+    // }else{
+    //   request({
+    //     url: '/playlist/catlist'
+    //   }).then( (res) => {
+    //     console.log(res);
+    //     wx.setStorageSync('catlistSub', res.sub);
+    //     _this.setData({
+    //       catlistSub: res.sub
+    //     })
+    //   })
+    // }
+  },
+
+  // doxx(e){
+  //   const catlistSub = this.data.catlistSub;
+  //   const { currentTarget } = e;
+  //   let arr = [];
+  //   for(let i = 0; i < catlistSub.length; i++){
+  //     if (currentTarget.dataset.id == catlistSub[i].category){
+  //       arr.push(catlistSub[i])
+  //     }
+  //   }
+  //   this.setData({
+  //     arr,
+  //     modalName: true
+  //   })
+  // },
+
+  // hideModal(e) {
+  //   this.setData({
+  //     modalName: false
+  //   })
+  // },
 })

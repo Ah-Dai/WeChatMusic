@@ -1,0 +1,4 @@
+/* pages/singer-details/singer-details.wxss */
+.new-bgImg{
+  background-position: top;
+}

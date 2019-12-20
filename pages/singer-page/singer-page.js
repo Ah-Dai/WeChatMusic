@@ -1,9 +1,11 @@
 const app = getApp();
-import { request } from '../../utils/request.js'
+import { request } from '../../utils/request.js';
+import { setStorageSync, getStorageSync, ArtistList } from '../../utils/util.js';
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
+    ScreenHeight: app.globalData.ScreenHeight - (app.globalData.CustomBar * 2),
 
     multiArray: [
       [{
@@ -38,45 +40,93 @@ Page({
 
     category: '100',
     code: '1',
-    categoryCode: '华语男歌手'
+    categoryCode: '华语男歌手',
+    render: false,
+    artists: [],
+    offset: 0
   },
 
   onLoad(){
+    // const artistList = new ArtistList();
+    // console.log(artistList.getArtistListStorget('artistList'))
     let { category, code } = this.data;
-    this.gainArtist(category, code);
+    this.gainArtist({
+      cat: category + code,
+      offset: 0
+    });
     wx.showLoading({
       title: '加载中...',
       mask: true
     });
+    // console.log(setStorageSync, getStorageSync)
   },
 
   onReady() {
-    wx.hideLoading()
+    wx.hideLoading();
   },
 
-  gainArtist(category,code){
+  doxx(e){
+    const { currentTarget } = e;
+    
+    console.log(e)
+  },
+
+  gainArtist(options){
     const _this = this;
-    const cat = category + code;
+    const artists = this.data.artists;
     request({
-      url: `/artist/list?cat=${cat}&limit=${10}`,
+      url: `/artist/list?cat=${options.cat}&limit=${15}&offset=${options.offset}`,
     }).then((res) => {
-      console.log(res)
+      // console.log(res)
+      if(res.more === false){
+        return _this.setData({
+          more: res.more,
+          render: false
+        })
+      }
+      for (let i = 0; i < res.artists.length; i++){
+        artists.push(res.artists[i]);
+      }
       _this.setData({
-        artists: res.artists
+        artists,
+        render: false
       })
     })
   },
 
+  // scroll-view 滑到底部事件
+  offsetUpdate() { 
+    const { offset, category, code, more } = this.data;
+    let _offset = offset + 15
+    if(more === false) return
+
+    this.gainArtist({
+      cat: category + code,
+      offset: _offset
+    });
+
+    this.setData({
+      offset: _offset,
+      render: true
+    });
+  },
+
+  // 侧边栏单选框事件
   gainCategoryCode(e){
     let { detail } = e;
     let name = detail.value.length == 3 ? 'category' : 'code';
 
     this.setData({
-      [name]: detail.value
+      [name]: detail.value,
+      render: true,
+      artists: []
     });
 
     let { category, code, multiArray } = this.data;
-    this.gainArtist(category, code);
+    this.gainArtist({
+      cat: category + code,
+      offset: 0
+    });
 
     let artistname = multiArray[0].filter(item => { return category === item.value });
     let artistsex = multiArray[1].filter(item => { return code === item.value });

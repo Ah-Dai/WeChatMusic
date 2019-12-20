@@ -1,3 +1,4 @@
+import { request } from '/request.js';
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -14,7 +15,28 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+function setStorageSync(key, data){
+  return wx.setStorageSync(key, data)
+}
 
+function getStorageSync(key){
+  return wx.getStorageSync(key)
+}
+
+class ArtistList{
+  getArtistListStorget(key){
+    const data = wx.getStorageSync(key)
+    if(data){
+      return data
+    }
+    request({
+      url: '/artist/list'
+    }).then( (res) => {
+      wx.setStorageSync('artistList', res)
+      return res
+    })
+  }
+}
 
 class Usertest{
   constructor(user){
@@ -38,5 +60,8 @@ class Usertest{
 
 module.exports = {
   formatTime: formatTime,
-  User: Usertest
+  User: Usertest,
+  getStorageSync,
+  setStorageSync,
+  ArtistList
 }

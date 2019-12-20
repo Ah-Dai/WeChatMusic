@@ -34,5 +34,5 @@ npm install
 ```
 然后运行 app.js 文件，默认端口：3000
 ```
-npm app.js
+node app.js
 ```

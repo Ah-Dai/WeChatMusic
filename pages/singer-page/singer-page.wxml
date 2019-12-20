@@ -1,4 +1,7 @@
 <!--pages/singer-page/singer-page.wxml-->
+<import src="/utils/loading.wxml" />
+<template is="loading" wx:if="{{render}}" /> 
+
 <cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
   <view slot="content">歌手</view>
   <view slot="backText">返回</view>
@@ -9,7 +12,7 @@
     <text class="cuIcon-title text-orange "></text> {{categoryCode}}
   </view>
   <view class="action">
-    <button class="cu-btn bg-green shadow margin-left" bindtap="showModal" data-target="DrawerModalL">Left</button>
+    <button class="cu-btn bg-green shadow margin-left" bindtap="showModal" data-target="DrawerModalL">筛选</button>
   </view>
 </view>
 
@@ -37,17 +40,15 @@
   </view>
 </view>
 
-<scroll-view>
+<scroll-view scroll-y="true" style="height:{{ScreenHeight}}px;" bindscrolltolower="offsetUpdate">
   <view class="cu-list menu-avatar">
-
     <block wx:for="{{artists}}" wx:key="{{item.id}}">
-      <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url({{item.img1v1Url}});"></view>
+      <view class="cu-item" data-id="{{item.id}}" bindtap="doxx">
+        <view class="cu-avatar round lg" style="background-image:url({{item.img1v1Url}}?param=500y500);"></view>
         <view class="content">
           <view class="text-grey">{{item.name}}</view>
         </view>
       </view>
     </block>
-
   </view>
 </scroll-view>
