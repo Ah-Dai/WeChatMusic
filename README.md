@@ -19,3 +19,20 @@
 * pages/singer-page 歌手页
 * utils 目录存放常用文件，如：loading.wxml(加载模板)
 
+
+
+
+// 功能模块还正在实现中... 
+
+使用了 [网易云音乐NodeJS版API](https://binaryify.github.io/NeteaseCloudMusicApi/#/)，获取数据，实现了登录，歌单，歌手，个人FM模块的数据显示。
+```
+git clone https://github.com/Binaryify/NeteaseCloudMusicApi.git
+```
+git clone 后需下载依赖
+```
+npm install
+```
+然后运行 app.js 文件，默认端口：3000
+```
+npm app.js
+```
