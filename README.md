@@ -20,6 +20,9 @@
 * utils 目录存放常用文件，如：loading.wxml(加载模板)
 
 
+* 歌手页面(singer-page) - 详情页(singer-details)/使用自定义组件(热门50,component/top-song)
+
+
 
 
 // 功能模块还正在实现中... 

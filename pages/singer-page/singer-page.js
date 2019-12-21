@@ -65,10 +65,11 @@ Page({
     wx.hideLoading();
   },
 
-  doxx(e){
+  skipDetails(e){
     const { currentTarget } = e;
-    
-    console.log(e)
+    wx.navigateTo({
+      url: `/pages/singer-details/singer-details?id=${currentTarget.dataset.id}`,
+    })
   },
 
   gainArtist(options){

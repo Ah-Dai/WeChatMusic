@@ -1,0 +1,25 @@
+<scroll-view scroll-y="true" style="height: calc(100vh - 500rpx - 90rpx);">
+  <view class="cu-list menu-avatar">
+    <block wx:for="{{hotSongs}}" wx:key="{{item.id}}">
+      <view class="cu-item" data-id="{{item.id}}" bindtap="onTap">
+      
+        <view class="new-cu-avatar">{{index + 1}}</view>
+
+        <view class="new-content">
+          <view class="new-text-hidden text-green">
+            <text class="text-cut" wx:if="{{item.alia.length === 0}}">{{item.name}}</text>
+            <text class="text-cut" wx:else>{{item.name}}（{{item.alia[0]}}）</text>
+          </view>
+          <view class="new-text-hidden text-gray text-sm flex">
+            <text class="text-cut">{{item.singerName}} - {{item.al.name}}</text>
+          </view>
+        </view>
+        
+      </view>
+    </block>
+  </view>
+
+  <view class="padding-lr bg-white text-center">
+    <view class="padding">全部歌曲</view>
+  </view>
+</scroll-view>

@@ -1,0 +1,4 @@
+/* pages/search/search.wxss */
+.new-cu-btn{
+  max-width: 250rpx;
+}

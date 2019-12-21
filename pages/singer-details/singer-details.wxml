@@ -1,27 +1,23 @@
-<!-- <scroll-view scroll-y="true" style="height: 100vh;" bindscrolltolower="doxx"> -->
+<view class='cu-custom'>
+  <view class="cu-bar fixed text-white" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='cuIcon-back'></text> 返回
+    </navigator>
+  </view>
+</view>
 
-  <view class='cu-custom'>
-    <view class="cu-bar fixed text-white" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
-      <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
-        <text class='cuIcon-back'></text> 返回
-      </navigator>
+<view class="new-bgImg bg-img padding-top-xl flex align-end" style="background-image: url({{artist.picUrl}});height: 500rpx;">
+  <view class="padding padding-top-xl flex-sub text-white text-bold">
+    {{artist.name}}
+  </view>
+</view>
+
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{index==TabCur?'text-orange cur':''}}" wx:for="{{navTabs}}"  bindtap="tabSelect" data-id="{{index}}" wx:key="index">
+      {{item.name}}
     </view>
   </view>
+</scroll-view>
 
-  <view class="new-bgImg bg-img padding-top-xl flex align-end" style="background-image: url('https://p1.music.126.net/nILBk4DaE3yV__25uq-5GQ==/18641120139241412.jpg');height: 500rpx;">
-    <view class="padding padding-top-xl flex-sub text-white">
-      陈奕迅
-    </view>
-  </view>
-
-  <scroll-view scroll-x class="bg-white nav">
-    <view class="flex text-center">
-      <view class="cu-item flex-sub {{index==TabCur?'text-orange cur':''}}" wx:for="{{navTabs}}"  bindtap="tabSelect" data-id="{{index}}" wx:key="index">
-        {{item.name}}
-      </view>
-    </view>
-  </scroll-view>
-
-  <song-list offset="{{offserIndex}}"/>
-
-<!-- </scroll-view> -->
+<top-song hotSongs="{{hotSongs}}" />

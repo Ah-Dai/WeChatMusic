@@ -1,0 +1,43 @@
+<!--pages/search/search.wxml-->
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <!-- <view slot="content">歌手</view> -->
+  <view slot="backText">返回</view>
+</cu-custom>
+
+<view class="cu-form-group">
+  <!-- <view class="title">验证码</view> -->
+  <input placeholder="输入关键字" bindinput="searchValue"></input>
+  <button class="new-cu-btn cu-btn bg-green shadow" bindtap="doxx">搜索</button>
+</view>
+
+
+
+<view>
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange "></text> 热搜榜
+    </view>
+  </view>
+  <view class="cu-list menu-avatar">
+    <block wx:for="{{hotSearch}}" wx:key>
+      <view class="cu-item">
+        <view class="new-cu-avatar">{{index + 1}}</view>
+
+        <view class="new-content">
+          <view class="new-text-hidden text-green">
+            <text class="text-cut">{{item.searchWord}}</text>
+            <!-- <view class="cu-tag round bg-orange sm">123</view> -->
+          </view>
+          <view class="new-text-hidden text-gray text-sm flex">
+            <text class="text-cut">{{item.content}}</text>
+          </view>
+        </view>
+
+        <view class="action">
+          <view class="text-grey text-xs">{{item.score}}</view>
+          <!-- <view class="cu-tag round bg-grey sm">5</view> -->
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

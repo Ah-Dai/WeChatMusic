@@ -1,6 +1,8 @@
 // pages/singer-details/singer-details.js
 const app = getApp();
 import { showToast } from '../../utils/wx-notice.js'
+import { request } from '../../utils/request.js'
+import { DisposeSong } from '../../utils/customClass.js'
 Page({
 
   /**
@@ -20,7 +22,35 @@ Page({
     },{
       name: '信息'
     }],
-    offserIndex: 0
+    offserIndex: 0,
+    topSonglist: [],
+  },
+
+  onLoad(option){
+    const _this = this;
+
+    wx.showLoading({
+      title: '加载中...',
+      mask: true
+    });
+
+    request({
+      url: `/artists?id=${option.id}`
+    }).then( (res) => {
+      console.log(res)
+      const doxx = new DisposeSong(res);
+      _this.setData({
+        // topSonglist: doxx.artistName(),
+        // artists: {
+        hotSongs: doxx.artistName(),
+        artist: doxx.artistInfo()
+        // }
+      })
+    })
+  },
+
+  onReady() {
+    wx.hideLoading();
   },
 
   tabSelect(e) {
@@ -37,10 +67,4 @@ Page({
       scrollLeft: (id - 1) * 60
     })
   },
-
-  doxx(){
-    this.setData({
-      offserIndex: this.data.offserIndex + 10
-    })
-  }
 })

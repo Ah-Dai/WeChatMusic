@@ -50,6 +50,13 @@ Component({
     outflowId(event){
       let { currentTarget } = event
       let { dataset } = currentTarget
+      if (dataset.id !== 'singer-page'){
+        return wx.showToast({
+          title: '暂未完善',
+          icon: 'none',
+          duration: 1000
+        })
+      }
       wx.navigateTo({
         url: `/pages/${dataset.id}/${dataset.id}`,
         fail(err){

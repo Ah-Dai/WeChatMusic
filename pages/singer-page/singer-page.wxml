@@ -16,6 +16,7 @@
   </view>
 </view>
 
+<!-- 侧边栏 -->
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal">
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
 
@@ -43,7 +44,7 @@
 <scroll-view scroll-y="true" style="height:{{ScreenHeight}}px;" bindscrolltolower="offsetUpdate">
   <view class="cu-list menu-avatar">
     <block wx:for="{{artists}}" wx:key="{{item.id}}">
-      <view class="cu-item" data-id="{{item.id}}" bindtap="doxx">
+      <view class="cu-item" data-id="{{item.id}}" bindtap="skipDetails">
         <view class="cu-avatar round lg" style="background-image:url({{item.img1v1Url}}?param=500y500);"></view>
         <view class="content">
           <view class="text-grey">{{item.name}}</view>

@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/singer-details/singer-details",
-    "pages/singer-page/singer-page",
+    "pages/search/search",
     "pages/index/index",
     "pages/login/login",
-    "pages/song-menu/song-menu"
-    
+    "pages/song-menu/song-menu",
+    "pages/singer-page/singer-page",
+    "pages/singer-details/singer-details"
   ],
   "window": {
     "backgroundTextStyle": "light",
