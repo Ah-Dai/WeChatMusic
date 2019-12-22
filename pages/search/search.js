@@ -1,81 +1,50 @@
 // pages/search/search.js
-import { request } from '../../utils/request.js'
+import { request } from '../../utils/request.js';
+import { setStorageSync, getStorageSync } from '../../utils/util.js';
+import { showToast } from '../../utils/wx-notice.js'
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    searchValue: null
+    searchValue: null,
+    topSearch: true,
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  onLoad(options) {
     const _this = this;
-    request({
-      url: '/search/hot/detail'
-    }).then( (res) => {
-      _this.setData({
-        hotSearch: res.data
+    const search_hot_detail = getStorageSync('search_hot_detail');
+    if (!search_hot_detail){
+      request({
+        url: '/search/hot/detail'
+      }).then((res) => {
+        setStorageSync('search_hot_detail', res.data);
+        _this.setData({
+          hotSearch: res.data
+        })
       })
-    })
-  },
-
-  doxx(){
-    const { searchValue } = this.data;
-    if (!searchValue){
-      return console.log(123)
+    }else{
+      this.setData({
+        hotSearch: search_hot_detail
+      })
     }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  confirmSearch() {
+    const { searchValue } = this.data;
+    if (!searchValue){
+      return showToast({
+        title: '关键字不能为空！',
+        icon: 'none'
+      })
+    }
+    
+    this.setData({
+      topSearch: false
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  searchInput(e) {
+    let { detail } = e;
+    this.setData({
+      searchValue: detail.value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

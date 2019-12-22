@@ -33,7 +33,6 @@ class DisposeSong{
       }
       _songs.push(obj);
     }
-    // console.log(_songs)
     return _songs
   }
 
