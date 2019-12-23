@@ -12,18 +12,20 @@ class DisposeSong{
       let item = songs[i];
       obj = {
         id: item.id,
-        mv: item.mv,
-        al: item.al,
+        mv: item.mv || item.mvid,
+        al: item.al || item.album,
         name: item.name,
-        alia: item.alia,
+        alia: item.alia || item.alias,
         singerName: ''
       }
-      if(item.ar.length === 1){
+      let ar = item.ar || item.artists;
+
+      if (ar === 1){
         obj.singerName = item.ar[0].name;
         _songs.push(obj);
         continue
       }
-      let ar = item.ar;
+    
       for(let j = 0; j < ar.length; j++){
         if(j === ar.length-1){
           obj.singerName += ar[j].name;

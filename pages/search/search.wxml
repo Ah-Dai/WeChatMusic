@@ -41,3 +41,4 @@
   </view>
 </view>
 
+<top-song hotSongs="{{search}}" wx:else/>

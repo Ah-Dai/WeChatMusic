@@ -1,7 +1,8 @@
 // pages/search/search.js
 import { request } from '../../utils/request.js';
 import { setStorageSync, getStorageSync } from '../../utils/util.js';
-import { showToast } from '../../utils/wx-notice.js'
+import { showToast } from '../../utils/wx-notice.js';
+import { DisposeSong } from '../../utils/customClass.js'
 Page({
   data: {
     searchValue: null,
@@ -29,15 +30,23 @@ Page({
 
   confirmSearch() {
     const { searchValue } = this.data;
+    const _this = this;
     if (!searchValue){
       return showToast({
         title: '关键字不能为空！',
         icon: 'none'
       })
     }
-    
-    this.setData({
-      topSearch: false
+    request({
+      url: `/search?keywords=${searchValue}`
+    }).then( (res) => {
+      const po = new DisposeSong({
+        hotSongs: res.result.songs
+      });
+      _this.setData({
+        topSearch: false,
+        search: po.artistName()
+      })
     })
   },
 
