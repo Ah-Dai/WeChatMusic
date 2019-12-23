@@ -20,4 +20,4 @@
   </view>
 </scroll-view>
 
-<top-song hotSongs="{{hotSongs}}" />
+<top-song hotSongs="{{hotSongs}}" scrollHeight="{{590}}" footerText="全部歌曲"/>

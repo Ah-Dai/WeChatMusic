@@ -22,7 +22,7 @@
 
     <view class="cu-list menu text-left">
       <radio-group class="block" bindchange="gainCategoryCode">
-        <view class="cu-form-group" wx:for="{{multiArray[0]}}" wx:key="{{item.value}}">
+        <view class="cu-form-group" wx:for="{{multiArray[0]}}" wx:key="value">
           <view class="title">{{item.name}}</view>
           <radio class="radio" value="{{item.value}}" checked="{{item.checked}}"></radio>
         </view>
@@ -31,7 +31,7 @@
 
     <view class="cu-list menu text-left">
       <radio-group class="block" bindchange="gainCategoryCode">
-        <view class="cu-form-group" wx:for="{{multiArray[1]}}" wx:key="{{item.value}}">
+        <view class="cu-form-group" wx:for="{{multiArray[1]}}" wx:key="value">
           <view class="title">{{item.name}}</view>
           <radio class="radio" value="{{item.value}}" checked="{{item.checked}}"></radio>
         </view>
@@ -43,7 +43,7 @@
 
 <scroll-view scroll-y="true" style="height:{{ScreenHeight}}px;" bindscrolltolower="offsetUpdate">
   <view class="cu-list menu-avatar">
-    <block wx:for="{{artists}}" wx:key="{{item.id}}">
+    <block wx:for="{{artists}}" wx:key="id">
       <view class="cu-item" data-id="{{item.id}}" bindtap="skipDetails">
         <view class="cu-avatar round lg" style="background-image:url({{item.img1v1Url}}?param=500y500);"></view>
         <view class="content">

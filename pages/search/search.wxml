@@ -6,8 +6,10 @@
 
 <view class="cu-form-group">
   <!-- <view class="title">验证码</view> -->
-  <input placeholder="输入关键字" bindinput="searchInput"></input>
+  <input placeholder="输入关键字" bindinput="searchInput" value="{{searchValue}}"></input>
+  <text class="cuIcon-close text-orange margin-sm" hidden="{{!searchValue}}" bindtap="hiddenTopSearch"></text>
   <button class="new-cu-btn cu-btn bg-green shadow" bindtap="confirmSearch">搜索</button>
+  <!-- <button class="new-cu-btn cu-btn bg-green shadow" bindtap="confirmSearch">搜索</button> -->
 </view>
 
 
@@ -19,7 +21,7 @@
   </view>
   <view class="cu-list menu-avatar">
     <block wx:for="{{hotSearch}}" wx:key="index">
-      <view class="cu-item">
+      <view class="cu-item" data-name="{{item.searchWord}}" bindtap="hotSearchTap">
         <view class="new-cu-avatar">{{index + 1}}</view>
 
         <view class="new-content">
@@ -41,4 +43,4 @@
   </view>
 </view>
 
-<top-song hotSongs="{{search}}" wx:else/>
+<top-song hotSongs="{{search}}" scrollHeight="{{230}}" footerText="点击加载" wx:else/>

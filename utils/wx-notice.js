@@ -13,7 +13,7 @@ function hideToast(){
 
 function showLoading(options){
   return wx.showLoading({
-    title: options.title,
+    title: options.title || 'Loading...',
     mask: true,
   })
 }

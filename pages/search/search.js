@@ -1,7 +1,7 @@
 // pages/search/search.js
 import { request } from '../../utils/request.js';
 import { setStorageSync, getStorageSync } from '../../utils/util.js';
-import { showToast } from '../../utils/wx-notice.js';
+import { showToast, showLoading, hideLoading, } from '../../utils/wx-notice.js';
 import { DisposeSong } from '../../utils/customClass.js'
 Page({
   data: {
@@ -37,9 +37,12 @@ Page({
         icon: 'none'
       })
     }
+
+    showLoading({});
     request({
       url: `/search?keywords=${searchValue}`
     }).then( (res) => {
+      hideLoading();
       const po = new DisposeSong({
         hotSongs: res.result.songs
       });
@@ -50,10 +53,35 @@ Page({
     })
   },
 
+  hotSearchTap(e){
+    let { currentTarget } = e;
+    this.setData({
+      searchValue: currentTarget.dataset.name
+    })
+    this.confirmSearch()
+  },
+
   searchInput(e) {
     let { detail } = e;
+    if (this.data.topSearch === false && !detail.value) {
+      return this.setData({
+        topSearch: true
+      })
+    }
     this.setData({
       searchValue: detail.value
+    })
+  },
+
+  hiddenTopSearch(){
+    if(!this.data.topSearch){
+      return this.setData({
+        searchValue: null,
+        topSearch: true
+      })
+    }
+    this.setData({
+      topSearch: false
     })
   },
 })

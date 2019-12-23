@@ -14,14 +14,6 @@
 | content  | 中间区域                           |
 | right    | 右侧区域(小程序端可使用范围很窄！) |
 
-* pages/component 目录下存放自定义组件
-* pages/index 首页
-* pages/singer-page 歌手页
-* utils 目录存放常用文件，如：loading.wxml(加载模板)
-
-
-* 歌手页面(singer-page) - 详情页(singer-details)/使用自定义组件(热门50,component/top-song)
-
 
 
 
@@ -39,3 +31,17 @@ npm install
 ```
 node app.js
 ```
+
+
+
+## 目录
+
+* pages/component 目录下存放自定义组件
+* pages/index 首页
+* pages/singer-page 歌手页
+* pages/singer-detail 歌手详情页
+* pages/search 搜索页
+* utils 目录存放常用文件，如：loading.wxml(加载模板)
+
+
+* 歌手页面(singer-page) - 详情页(singer-details)/使用自定义组件(热门50,component/top-song)

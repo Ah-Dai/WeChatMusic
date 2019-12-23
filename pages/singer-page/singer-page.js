@@ -74,24 +74,44 @@ Page({
 
   gainArtist(options){
     const _this = this;
-    const artists = this.data.artists;
+    let artists = this.data.artists;
+    let cat = options.cat;
+    let offset = options.offset;
+    // const singerCache = getStorageSync('singerCache');
+    // const cache = singerCache[options.cat];
+
+    // if (cache){
+    //   if(cache.more === false) return
+    //   offset = cache.offset + 15;
+    //   artists = cache.artists;
+    // }
+
     request({
-      url: `/artist/list?cat=${options.cat}&limit=${15}&offset=${options.offset}`,
+      url: `/artist/list?cat=${options.cat}&limit=${15}&offset=${offset}`,
     }).then((res) => {
-      // console.log(res)
-      if(res.more === false){
+      if (res.more === false) {
         return _this.setData({
           more: res.more,
           render: false
         })
       }
-      for (let i = 0; i < res.artists.length; i++){
+
+      for (let i = 0; i < res.artists.length; i++) {
         artists.push(res.artists[i]);
-      }
+      };
+
       _this.setData({
         artists,
         render: false
       })
+      
+      // setStorageSync('singerCache', {
+      //   [options.cat]:{
+      //     'offset': offset,
+      //     'artists': artists,
+      //     'more': res.more
+      //   }
+      // })
     })
   },
 

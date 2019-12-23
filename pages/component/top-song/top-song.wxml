@@ -1,6 +1,6 @@
-<scroll-view scroll-y="true" style="height: calc(100vh - 500rpx - 90rpx);">
+<scroll-view scroll-y="true" style="height: calc(100vh - {{scrollHeight}}rpx);">
   <view class="cu-list menu-avatar">
-    <block wx:for="{{hotSongs}}" wx:key="{{item.id}}">
+    <block wx:for="{{hotSongs}}" wx:key="id">
       <view class="cu-item" data-id="{{item.id}}" bindtap="onTap">
       
         <view class="new-cu-avatar">{{index + 1}}</view>
@@ -19,7 +19,7 @@
     </block>
   </view>
 
-  <view class="padding-lr bg-white text-center">
-    <view class="padding">全部歌曲</view>
+  <view class="padding-lr bg-white text-center" bindtap="doxx">
+    <view class="padding">{{footerText}}</view>
   </view>
 </scroll-view>

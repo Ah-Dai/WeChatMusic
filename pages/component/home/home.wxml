@@ -3,14 +3,14 @@
 </cu-custom>
 
 <view class="cu-bar bg-white search">
-  <view class="search-form round">
+  <view class="search-form round" bindtap="skipSearch">
     <text class="cuIcon-search"></text>
-    <input type="text" placeholder="搜索icon" confirm-type="search" bindinput="searchIcon"></input>
+    <input type="text" placeholder="搜索" confirm-type="search" disabled="true"></input>
   </view>
 </view>
 
 <view class="cu-list grid col-3 no-border margin-top-sm">
-  <view class="cu-item" wx:for="{{pageDown}}" wx:key="{{item.id}}" data-id="{{item.id}}" bindtap="outflowId">
+  <view class="cu-item" wx:for="{{pageDown}}" wx:key="id" data-id="{{item.id}}" bindtap="outflowId">
     <view class="{{item.icon}} text-yellow"></view>
     <text>{{item.name}}</text>
   </view>
@@ -23,7 +23,7 @@
 </view>
 
 <view class="cu-list menu-avatar">
-  <block wx:for="{{songList}}" wx:key="{{item.id}}">
+  <block wx:for="{{songList}}" wx:key="id">
     <view class="cu-item" data-id="{{item.id}}" bindtap="onTap">
       <view class="cu-avatar radius lg" style="background-image:url({{item.songSrc}});"></view>
       <view class="content">

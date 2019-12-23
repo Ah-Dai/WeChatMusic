@@ -68,7 +68,13 @@ Component({
     onTap(event) {
       let { currentTarget } = event
       this.triggerEvent('mySongid', currentTarget.dataset)
-    }
+    },
+
+    skipSearch(){
+      wx.navigateTo({
+        url: '/pages/search/search',
+      })
+    },
   },
 
   options: {

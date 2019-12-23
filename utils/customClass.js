@@ -43,6 +43,10 @@ class DisposeSong{
   }
 }
 
+class SingerCache{
+  
+}
+
 module.exports = {
   DisposeSong
 }
