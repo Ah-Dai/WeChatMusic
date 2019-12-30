@@ -1,0 +1,19 @@
+/* pages/song-detail/song-detail.wxss */
+
+.song-detail{
+  height: calc( 100vh - 128rpx );
+}
+
+.song-img{
+  border-radius: 50%;
+  width: 400rpx;
+  height: 400rpx;
+}
+
+.basis-xxs{
+	flex-basis: 10%;
+}
+
+.basis-l{
+  flex-basis: 70%
+}

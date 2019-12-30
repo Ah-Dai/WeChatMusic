@@ -1,5 +1,5 @@
 // pages/search/search.js
-import { request } from '../../utils/request.js';
+import { getRequest } from '../../utils/request.js';
 import { setStorageSync, getStorageSync } from '../../utils/util.js';
 import { showToast, showLoading, hideLoading, } from '../../utils/wx-notice.js';
 import { DisposeSong } from '../../utils/customClass.js'
@@ -7,6 +7,7 @@ Page({
   data: {
     searchValue: null,
     topSearch: true,
+    footerToggle: true
   },
 
   onLoad(options) {
@@ -30,7 +31,6 @@ Page({
 
   confirmSearch() {
     const { searchValue } = this.data;
-    const _this = this;
     if (!searchValue){
       return showToast({
         title: '关键字不能为空！',
@@ -38,17 +38,67 @@ Page({
       })
     }
 
+    this.unifySearchRequest({
+      keywords: searchValue,
+      limit: 30,
+      offset: 0,
+    })
+    // getRequest({
+    //   url: `/search?keywords=${searchValue}`
+    // }).then( (res) => {
+    //   hideLoading();
+    //   const po = new DisposeSong({
+    //     hotSongs: res.result.songs
+    //   });
+    //   _this.setData({
+    //     topSearch: false,
+    //     search: po.artistName()
+    //   })
+    // })
+  },
+
+  limit(e){
+    console.log(e);
+    const { detail } = e;
+    const { searchValue } = this.data;
+    
+    this.unifySearchRequest({
+      keywords: searchValue,
+      limit: 30,
+      offset: detail.offset,
+      hotSongs: detail.hotSongs
+    })
+  },
+
+  unifySearchRequest(options){
+    const _this = this;
     showLoading({});
-    request({
-      url: `/search?keywords=${searchValue}`
+    getRequest({
+      url: `/search?keywords=${options.keywords}&limit=${options.limit}&offset=${options.offset}`,
     }).then( (res) => {
       hideLoading();
+      if(res.result.hasOwnProperty('songs') === false){
+        showToast({
+          title: '没有更多了',
+          icon: 'none'
+        });
+        return _this.setData({
+          footerToggle: false
+        })
+      }
+
       const po = new DisposeSong({
         hotSongs: res.result.songs
       });
+
+      let po_hotSongs = po.artistName();
+      if(options.hotSongs){
+        po_hotSongs = options.hotSongs.concat(po_hotSongs);
+      };
+
       _this.setData({
         topSearch: false,
-        search: po.artistName()
+        hotSongs: po_hotSongs
       })
     })
   },
@@ -65,7 +115,8 @@ Page({
     let { detail } = e;
     if (this.data.topSearch === false && !detail.value) {
       return this.setData({
-        topSearch: true
+        topSearch: true,
+        footerToggle: true
       })
     }
     this.setData({
@@ -77,11 +128,12 @@ Page({
     if(!this.data.topSearch){
       return this.setData({
         searchValue: null,
-        topSearch: true
+        topSearch: true,
+        footerToggle: true
       })
     }
     this.setData({
-      topSearch: false
+      searchValue: null,
     })
   },
 })

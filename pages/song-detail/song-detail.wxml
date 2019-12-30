@@ -1,0 +1,29 @@
+<!--pages/song-detail/song-detail.wxml-->
+
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <!-- <view slot="content">歌手</view> -->
+  <view slot="backText">返回</view>
+</cu-custom>
+
+<view class="bg-white song-detail">
+
+  <view class="bg-white padding-tb-xl padding-lr">
+    <view class="grid col-1 margin-bottom text-center">
+      <view class="padding">XXX</view>
+      <view class="padding">
+        <image class="song-img" src="https://p2.music.126.net/klOSGBRQhevtM6c9RXrM1A==/18808245906527670.jpg"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="bg-white padding-tb-xl">
+    <view class="flex flex-wrap align-center justify-center">
+      <view class="basis-xxs padding-sm radius">00:59</view>
+      <view class="basis-l radius">
+        <slider max="5" block-size="12" bindchange="sliderChange" value="{{value}}"></slider>
+      </view>
+      <view class="basis-xxs padding-sm radius">00:60</view>
+    </view>
+  </view>
+  <button bindtap="dod">123</button>
+</view>

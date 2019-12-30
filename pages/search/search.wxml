@@ -43,4 +43,4 @@
   </view>
 </view>
 
-<top-song hotSongs="{{search}}" scrollHeight="{{230}}" footerText="点击加载" wx:else/>
+<top-song hotSongs="{{hotSongs}}" scrollHeight="{{230}}" footerText="点击加载" bind:limit="limit" footerToggle="{{footerToggle}}" wx:else/>
