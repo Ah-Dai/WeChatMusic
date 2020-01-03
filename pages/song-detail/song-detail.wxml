@@ -11,7 +11,7 @@
     <view class="grid col-1 margin-bottom text-center">
       <view class="padding">XXX</view>
       <view class="padding">
-        <image class="song-img" src="https://p2.music.126.net/klOSGBRQhevtM6c9RXrM1A==/18808245906527670.jpg"></image>
+        <image class="song-img" style="animation: music_disc 100s linear infinite; animation-play-state: {{op}}" src="https://p2.music.126.net/klOSGBRQhevtM6c9RXrM1A==/18808245906527670.jpg"></image>
       </view>
     </view>
   </view>
