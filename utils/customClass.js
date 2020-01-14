@@ -1,3 +1,6 @@
+import { getRequest } from './request.js'
+import { showToast, showLoading, hideLoading } from './wx-notice.js'
+
 class DisposeSong{
   constructor(options){
     this.songs = options.hotSongs;
@@ -44,10 +47,65 @@ class DisposeSong{
 
 }
 
-class SingerCache{
-  
+class SingerCache{}
+
+class Song{
+  constructor(id){
+    this.id = id;   //音乐id
+  }
+
+  playMusic(id) {
+    getRequest({
+      url: '/song/detail',
+      data: {
+        ids: id
+      }
+    }).then(res => {
+      console.log(id);
+      hideLoading();
+      const code = res.code;
+      if(code === 200){
+        const song = res.songs[0];
+        const ar = song.ar[0];
+        const getBackgroundAudioManager = wx.getBackgroundAudioManager();
+        getBackgroundAudioManager.singe = ar.name;
+        getBackgroundAudioManager.title = song.name;
+        getBackgroundAudioManager.src = `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
+        // 专辑
+        getBackgroundAudioManager.epname = song.al.name;
+        getBackgroundAudioManager.coverImgUrl = song.al.picUrl;
+      }
+    })
+  }
+
+  // 音乐是否可用
+  checkMusic(callback){
+    const _this = this;
+    const id = this.id;
+    showLoading()
+    getRequest({
+      url: '/check/music',
+      data: {
+        id: id
+      }
+    }).then(res => {
+      let success = res.success;
+      if (success){
+        _this.playMusic(id)
+        return success
+        // return callback(success)
+      }else{
+        hideLoading();
+        showToast({
+          title: res.message,
+          icon: 'none'
+        })
+      }
+    })
+  }
 }
 
 module.exports = {
-  DisposeSong
+  DisposeSong,
+  Song
 }

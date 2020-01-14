@@ -1,6 +1,6 @@
 // pages/singer-details/singer-details.js
 const app = getApp();
-import { showToast } from '../../utils/wx-notice.js'
+import { showToast, showLoading } from '../../utils/wx-notice.js'
 import { request } from '../../utils/request.js'
 import { DisposeSong } from '../../utils/customClass.js'
 Page({
@@ -28,23 +28,15 @@ Page({
 
   onLoad(option){
     const _this = this;
-
-    wx.showLoading({
-      title: '加载中...',
-      mask: true
-    });
-
+    showLoading();
     request({
       url: `/artists?id=${option.id}`
     }).then( (res) => {
       console.log(res)
       const doxx = new DisposeSong(res);
       _this.setData({
-        // topSonglist: doxx.artistName(),
-        // artists: {
         hotSongs: doxx.artistName(),
         artist: doxx.artistInfo()
-        // }
       })
     })
   },

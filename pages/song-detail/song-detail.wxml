@@ -25,5 +25,9 @@
       <view class="basis-xxs padding-sm radius">00:60</view>
     </view>
   </view>
-  <button bindtap="dod">123</button>
+  <!-- <button bindtap="dod">123</button> -->
+  <view>
+    <!-- playfill  stop -->
+    <text class="cuIcon-playfill lg text-gray"></text>
+  </view>
 </view>

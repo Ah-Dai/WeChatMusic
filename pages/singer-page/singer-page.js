@@ -1,11 +1,12 @@
 const app = getApp();
 import { request } from '../../utils/request.js';
 import { setStorageSync, getStorageSync, ArtistList } from '../../utils/util.js';
+import { showToast, showLoading, hideLoading } from '../../utils/wx-notice.js';
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    ScreenHeight: app.globalData.ScreenHeight - (app.globalData.CustomBar * 2),
+    ScreenHeight: app.globalData.ScreenHeight - (app.globalData.CustomBar * 2) + app.globalData.StatusBar,
 
     multiArray: [
       [{
@@ -41,24 +42,17 @@ Page({
     category: '100',
     code: '1',
     categoryCode: '华语男歌手',
-    render: false,
     artists: [],
     offset: 0
   },
 
   onLoad(){
-    // const artistList = new ArtistList();
-    // console.log(artistList.getArtistListStorget('artistList'))
     let { category, code } = this.data;
     this.gainArtist({
       cat: category + code,
       offset: 0
     });
-    wx.showLoading({
-      title: '加载中...',
-      mask: true
-    });
-    // console.log(setStorageSync, getStorageSync)
+    showLoading()
   },
 
   onReady() {
@@ -72,27 +66,21 @@ Page({
     })
   },
 
+  // 请求
   gainArtist(options){
     const _this = this;
     let artists = this.data.artists;
     let cat = options.cat;
     let offset = options.offset;
-    // const singerCache = getStorageSync('singerCache');
-    // const cache = singerCache[options.cat];
-
-    // if (cache){
-    //   if(cache.more === false) return
-    //   offset = cache.offset + 15;
-    //   artists = cache.artists;
-    // }
+    showLoading();
 
     request({
       url: `/artist/list?cat=${options.cat}&limit=${15}&offset=${offset}`,
     }).then((res) => {
+      hideLoading();
       if (res.more === false) {
         return _this.setData({
           more: res.more,
-          render: false
         })
       }
 
@@ -102,16 +90,7 @@ Page({
 
       _this.setData({
         artists,
-        render: false
       })
-      
-      // setStorageSync('singerCache', {
-      //   [options.cat]:{
-      //     'offset': offset,
-      //     'artists': artists,
-      //     'more': res.more
-      //   }
-      // })
     })
   },
 
@@ -128,7 +107,6 @@ Page({
 
     this.setData({
       offset: _offset,
-      render: true
     });
   },
 
@@ -139,7 +117,6 @@ Page({
 
     this.setData({
       [name]: detail.value,
-      render: true,
       artists: []
     });
 

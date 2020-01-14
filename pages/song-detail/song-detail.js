@@ -1,4 +1,6 @@
 // pages/song-detail/song-detail.js
+import { Song } from '../../utils/customClass.js'
+
 Page({
 
   /**
@@ -10,6 +12,10 @@ Page({
   },
 
   onLoad(){
+    // const song = new Song(33894312)
+    // song.checkMusic((item) => {
+    //   console.log(item)
+    // })
   },
 
   sliderChange(e){
@@ -17,8 +23,12 @@ Page({
   },
 
   dod(){
+    let op = 'running';
+    if (this.data.op === 'running'){
+      op = 'paused'
+    }
     this.setData({
-      op: 'paused'
+      op: op
     })
     // let doxx = this.data.doxx;
     // let _this = this;

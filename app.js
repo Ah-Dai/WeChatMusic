@@ -35,7 +35,8 @@ App({
   },
   
   globalData: {
-    pathUrl: 'http://localhost:3000',
+    // pathUrl: 'http://localhost:3000',
+    pathUrl: 'http://192.168.101.56:3000',
     userInfo: null
   }
 })

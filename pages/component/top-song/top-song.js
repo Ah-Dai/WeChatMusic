@@ -1,3 +1,5 @@
+import { Song } from '../../../utils/customClass.js'
+
 Component({
   properties: {
     hotSongs: Object,
@@ -23,6 +25,12 @@ Component({
           offset: offset += 30
         })
       }
+    },
+
+    onTap({ currentTarget }){
+      let { dataset } = currentTarget;
+      const song = new Song(dataset.id);
+      song.checkMusic()
     }
   },
 

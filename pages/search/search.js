@@ -14,7 +14,7 @@ Page({
     const _this = this;
     const search_hot_detail = getStorageSync('search_hot_detail');
     if (!search_hot_detail){
-      request({
+      getRequest({
         url: '/search/hot/detail'
       }).then((res) => {
         setStorageSync('search_hot_detail', res.data);
@@ -29,6 +29,7 @@ Page({
     }
   },
 
+  // 搜索按钮事件
   confirmSearch() {
     const { searchValue } = this.data;
     if (!searchValue){
@@ -43,20 +44,9 @@ Page({
       limit: 30,
       offset: 0,
     })
-    // getRequest({
-    //   url: `/search?keywords=${searchValue}`
-    // }).then( (res) => {
-    //   hideLoading();
-    //   const po = new DisposeSong({
-    //     hotSongs: res.result.songs
-    //   });
-    //   _this.setData({
-    //     topSearch: false,
-    //     search: po.artistName()
-    //   })
-    // })
   },
 
+  // 传入自定义组件 top-song
   limit(e){
     console.log(e);
     const { detail } = e;
@@ -70,9 +60,10 @@ Page({
     })
   },
 
+  // 请求
   unifySearchRequest(options){
     const _this = this;
-    showLoading({});
+    showLoading();
     getRequest({
       url: `/search?keywords=${options.keywords}&limit=${options.limit}&offset=${options.offset}`,
     }).then( (res) => {
@@ -103,6 +94,7 @@ Page({
     })
   },
 
+  // 热搜榜
   hotSearchTap(e){
     let { currentTarget } = e;
     this.setData({
@@ -111,6 +103,7 @@ Page({
     this.confirmSearch()
   },
 
+  // 输入框事件
   searchInput(e) {
     let { detail } = e;
     if (this.data.topSearch === false && !detail.value) {
@@ -124,6 +117,7 @@ Page({
     })
   },
 
+  // 输入框按钮事件
   hiddenTopSearch(){
     if(!this.data.topSearch){
       return this.setData({

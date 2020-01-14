@@ -11,9 +11,9 @@ function hideToast(){
   return wx.hideToast();
 }
 
-function showLoading(options){
+function showLoading(title){
   return wx.showLoading({
-    title: options.title || 'Loading...',
+    title: title || 'Loading...',
     mask: true,
   })
 }
