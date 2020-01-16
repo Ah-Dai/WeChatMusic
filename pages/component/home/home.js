@@ -1,6 +1,7 @@
 Component({
   data: {
-    pageDown:[{
+    pageDown:[
+      {
         id: 1,
         icon: 'cuIcon-wefill',
         name: '个人'
@@ -8,11 +9,13 @@ Component({
         id: 'song-menu',
         icon: 'cuIcon-apps',
         name: '歌单'
-      },{
+      },
+      {
         id: 'singer-page',
         icon: 'cuIcon-friendfill',
         name: '歌手'
     }],
+
     songList: [{
         id: 0,
         name: '李荣浩',

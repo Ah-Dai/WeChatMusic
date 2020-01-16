@@ -20,4 +20,17 @@
   </view>
 </scroll-view>
 
-<top-song hotSongs="{{hotSongs}}" scrollHeight="{{590}}" footerText="全部歌曲"/>
+<top-song hotSongs="{{hotSongs}}" scrollHeight="{{590}}" footerText="全部歌曲" wx:if="{{TabCur == 0}}"/>
+
+<scroll-view scroll-y style="height: calc(100vh - 590rpx);" wx:if="{{TabCur == 3}}">
+  <view class="padding">
+    <view class="ti">歌手简介</view>
+    <text>{{artist.briefDesc}}</text>
+
+    <block wx:for="{{introduction}}" wx:key="{{index}}">
+      <view class="ti">{{item.ti}}</view>
+      <text>{{item.txt}}</text>
+    </block>
+  </view>
+</scroll-view>
+

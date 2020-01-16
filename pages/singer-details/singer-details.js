@@ -1,7 +1,7 @@
 // pages/singer-details/singer-details.js
 const app = getApp();
 import { showToast, showLoading } from '../../utils/wx-notice.js'
-import { request } from '../../utils/request.js'
+import { request, getRequest } from '../../utils/request.js'
 import { DisposeSong } from '../../utils/customClass.js'
 Page({
 
@@ -31,12 +31,23 @@ Page({
     showLoading();
     request({
       url: `/artists?id=${option.id}`
+      // url: `/artists?id=126066`
     }).then( (res) => {
       console.log(res)
       const doxx = new DisposeSong(res);
       _this.setData({
         hotSongs: doxx.artistName(),
         artist: doxx.artistInfo()
+      })
+    });
+
+    getRequest({
+      url: `/artist/desc?id=${option.id}`
+      // url: '/artist/desc?id=126066'
+    }).then(res => {
+      console.log(res)
+      _this.setData({
+        introduction: res.introduction
       })
     })
   },
@@ -48,7 +59,9 @@ Page({
   tabSelect(e) {
     const { currentTarget } = e;
     const id = currentTarget.dataset.id;
-    if(id != '0'){
+    const _this = this;
+    
+    if(id != '0' && id != '3'){
       return showToast({
         title: '此功能暂未开通',
         icon: 'none'

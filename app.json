@@ -7,7 +7,6 @@
     "pages/singer-details/singer-details",
     "pages/search/search",
     "pages/song-detail/song-detail"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",

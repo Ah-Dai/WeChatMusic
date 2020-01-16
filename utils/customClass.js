@@ -44,7 +44,6 @@ class DisposeSong{
   artistInfo(){
     return this.artist
   }
-
 }
 
 class SingerCache{}

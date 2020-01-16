@@ -2,3 +2,13 @@
 .new-bgImg{
   background-position: top;
 }
+
+.padding{
+  padding: 20rpx
+}
+
+.ti{
+  padding: 30rpx 0 10rpx 0;
+  font-size: 30rpx;
+  font-weight: bold;
+}

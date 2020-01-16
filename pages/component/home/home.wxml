@@ -16,7 +16,7 @@
   </view>
 </view>
 
-<view class="cu-bar bg-white solid-bottom margin-top-sm">
+<!-- <view class="cu-bar bg-white solid-bottom margin-top-sm">
   <view class="action">
     <text class="cuIcon-title text-green"></text>推荐歌曲
   </view>
@@ -34,10 +34,6 @@
           <text class="text-cut">{{item.name}}</text>
         </view>
       </view>
-      <!-- <view class="action">
-        <view class="text-grey text-xs">22:20</view>
-        <view class="cu-tag round bg-red sm">5</view>
-      </view> -->
     </view>
   </block>
-</view>
+</view> -->
