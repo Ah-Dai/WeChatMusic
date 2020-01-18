@@ -1,0 +1,18 @@
+<!--pages/songMenu/classify/classify.wxml-->
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <view slot="content">歌单分类</view>
+  <view slot="backText">返回</view>
+</cu-custom>
+
+<block wx:for="{{catlist}}" wx:key="{{item.category}}">
+  <view class="cu-bar bg-white solid-bottom margin-top-xs">
+    <view class="action">
+      <text class="cuIcon-title text-orange "></text> {{item.name}}
+    </view>
+  </view>
+  <view class="cu-list grid col-3">
+    <view class="cu-item" wx:for="{{item.sub}}" wx:key>
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+</block>

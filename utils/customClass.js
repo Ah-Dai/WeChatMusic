@@ -104,7 +104,37 @@ class Song{
   }
 }
 
+class PlayList{
+  constructor(){}
+
+  catlist(obj){
+    if (("categories" in obj) === false){
+      return false
+    }
+    const categories = obj.categories;
+    const obj_sub = obj.sub;
+    const arr = [];
+    for(let key in categories){
+      arr.push({
+        category: Number(key),
+        name: categories[key],
+        sub: []
+      })
+    }
+    for(let i = 0; i < arr.length; i++){
+      for (let j = 0; j < obj_sub.length; j++) {
+        if (arr[i].category === obj_sub[j].category){
+          arr[i].sub.push(obj_sub[j])
+        }
+      }
+    }
+    // arr
+    return arr
+  }
+}
+
 module.exports = {
   DisposeSong,
-  Song
+  Song,
+  PlayList
 }
